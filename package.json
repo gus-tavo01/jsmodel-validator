@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Js model validator",
   "main": "index.js",
+  "type": "commonjs",
   "scripts": {
     "start": "node index.js"
   },
@@ -17,7 +18,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
-    "eslint": "^8.0.0",
+    "eslint": "^7.23.0",
     "nodemon": "^2.0.13",
     "prettier": "^2.4.1"
   }
