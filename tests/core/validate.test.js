@@ -1,5 +1,5 @@
-const validate = require('../src/validate');
-const Validations = require('../validations');
+const validate = require('../../src/validate');
+const Validations = require('../../validations');
 
 describe('Validate execution', () => {
   test('When multiple validations are given, expect them to be executed', async () => {
