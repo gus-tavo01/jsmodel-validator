@@ -1,6 +1,6 @@
 {
   "name": "jsmodel-validator",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Js model validator",
   "main": "index.js",
   "type": "commonjs",
