@@ -1,4 +1,4 @@
-const numberValidations = require('../../validations/number');
+const numberValidations = require('../../src/validations/number');
 
 describe('Number Validations isNumeric', () => {
   test('When a numeric type value is provided, expect to be success', async () => {

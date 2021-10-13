@@ -1,4 +1,4 @@
-const booleanValidations = require('../../validations/boolean');
+const booleanValidations = require('../../src/validations/boolean');
 
 describe('Boolean Validations isBool', () => {
   test('When value is boolean type, expect validation to be success', async () => {
@@ -6,7 +6,7 @@ describe('Boolean Validations isBool', () => {
     const value = true;
 
     // Act
-    const result = booleanValidations.isBool('test', value);
+    const result = booleanValidations.isBool('test', value).execute();
 
     // Assert
     expect(result).toBeTruthy();
@@ -17,7 +17,7 @@ describe('Boolean Validations isBool', () => {
     const value = 'true';
 
     // Act
-    const result = booleanValidations.isBool('test', value);
+    const result = booleanValidations.isBool('test', value).execute();
 
     // Assert
     expect(result).toBeTruthy();
@@ -28,7 +28,7 @@ describe('Boolean Validations isBool', () => {
     const value = [true];
 
     // Act
-    const result = booleanValidations.isBool('test', value);
+    const result = booleanValidations.isBool('test', value).execute();
 
     // Assert
     expect(result).not.toBeTruthy();
@@ -39,7 +39,7 @@ describe('Boolean Validations isBool', () => {
     const value = 1;
 
     // Act
-    const result = booleanValidations.isBool('test', value);
+    const result = booleanValidations.isBool('test', value).execute();
 
     // Assert
     expect(result).not.toBeTruthy();
