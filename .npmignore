@@ -1,0 +1,7 @@
+# directories
+/tests
+/.vscode
+# files
+jest.config.json
+.eslintrc.json
+.prettierrc.json
