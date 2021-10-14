@@ -23,6 +23,6 @@
     "prettier": "^2.4.1"
   },
   "peerDependencies": {
-    "validator": "~13.x.x"
+    "validator": "13.x.x"
   }
 }
