@@ -1,9 +1,9 @@
-const validate = require('./src/validate');
-const validateModel = require('./src/validateModel');
-const validations = require('./src/validations');
+const validate = require('./core/validate');
+const validateModel = require('./core/validateModel');
+const validations = require('./core/validations');
 
 module.exports = {
-  validate,
   validations,
+  validate,
   validateModel,
 };

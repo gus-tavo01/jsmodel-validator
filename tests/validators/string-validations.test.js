@@ -1,4 +1,4 @@
-const stringValidations = require('../../src/validations/string');
+const stringValidations = require('../../core/validations/string');
 
 describe('String Validations isString', () => {
   test('When a valid string type value is provided, expect to be success', async () => {

@@ -1,7 +1,7 @@
 {
-  "name": "jsmodel-validator",
-  "version": "1.0.2",
-  "description": "Js model validator",
+  "name": "js-validation-tool",
+  "version": "0.1.0",
+  "description": "JS validator model support",
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
@@ -9,7 +9,10 @@
     "test": "jest"
   },
   "keywords": [
-    "validator"
+    "js",
+    "validator",
+    "model",
+    "multiple"
   ],
   "author": "GALV",
   "license": "ISC",

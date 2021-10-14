@@ -1,4 +1,4 @@
-const booleanValidations = require('../../src/validations/boolean');
+const booleanValidations = require('../../core/validations/boolean');
 
 describe('Boolean Validations isBool', () => {
   test('When value is boolean type, expect validation to be success', async () => {

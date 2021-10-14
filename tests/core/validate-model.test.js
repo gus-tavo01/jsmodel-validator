@@ -1,5 +1,5 @@
-const validateModel = require('../../src/validateModel');
-const Validations = require('../../src/validations');
+const validateModel = require('../../core/validateModel');
+const Validations = require('../../core/validations');
 
 describe('Validate-Model execution', () => {
   test('When a validation model is provided, expect return an object with {isValid, fields}', async () => {
