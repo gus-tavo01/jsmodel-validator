@@ -14,7 +14,14 @@
     "model",
     "multiple"
   ],
-  "author": "GALV",
+  "author": {
+    "name": "Gustavo Loera",
+    "email": "gustavoa.loera01@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gus-tavo01/jsmodel-validator"
+  },
   "license": "ISC",
   "devDependencies": {
     "jest": "^27.2.5",
