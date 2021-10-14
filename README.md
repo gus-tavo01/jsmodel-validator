@@ -73,7 +73,7 @@ console.log(customValResult); // prints { isValid: false, fields: [ "Field 'name
 ### Full example
 
 ```
-const { validate, validateModel, validations } = require('../index');
+const { validate, validateModel, validations } = require('js-validator-tool');
 
 (async () => {
   // model validator example
