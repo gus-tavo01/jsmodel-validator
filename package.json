@@ -1,6 +1,6 @@
 {
   "name": "js-validation-tool",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "JS validator model support",
   "main": "index.js",
   "type": "commonjs",
