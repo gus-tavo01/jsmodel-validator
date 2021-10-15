@@ -7,6 +7,6 @@ module.exports = (key, value, errorMsg = undefined) => {
     validation: 'isNotEmpty',
     property: key,
     onFailureMessage: validationFailureMessage,
-    execute: () => !validator.isEmpty(value),
+    execute: () => !validator.isEmpty(value, { ignore_whitespace: true }),
   };
 };
