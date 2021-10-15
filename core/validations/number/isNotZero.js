@@ -1,5 +1,5 @@
 module.exports = (key, value, errMessage = undefined) => {
-  const defaultMsg = `Field '${key}', expected not to be Zero. Got ${value}`;
+  const defaultMsg = `Field '${key}', expected not to be Zero. Got: ${value}`;
   const validationFailureMessage = !errMessage ? defaultMsg : errMessage;
   return {
     validation: 'isNotZero',
