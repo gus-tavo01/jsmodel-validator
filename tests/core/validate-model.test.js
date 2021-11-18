@@ -14,7 +14,7 @@ describe('Validate-Model execution', () => {
     const validationResult = await validateModel(personModel, person);
 
     expect(validationResult).toHaveProperty('fields', [
-      `Field 'age', expected to be by: 15 and 30. Got ${person.age}`,
+      `Field 'age', expected to be by: 15 and 30. Got: ${person.age}`,
     ]);
     expect(validationResult).toHaveProperty('isValid');
   });
@@ -57,7 +57,7 @@ describe('Validate-Model execution', () => {
     expect(validationResult).toMatchObject({
       isValid: false,
       fields: [
-        `Field 'age', expected to be by: ${from} and ${to}. Got ${dog.age}`,
+        `Field 'age', expected to be by: ${from} and ${to}. Got: ${dog.age}`,
       ],
     });
   });
