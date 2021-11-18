@@ -88,7 +88,48 @@ describe('String Validations isMongoId', () => {
   });
 });
 
-// describe('String Validations isLength', () => {});
+describe('String Validations isLength', () => {
+  test('When the given strings length matches, expect validation to be passed', () => {
+    // Arrange
+    const value = 'Valid string';
+
+    // Act
+    const isValid = stringValidations
+      .isLength('test', value, {
+        min: 3,
+        max: 15,
+      })
+      .execute();
+
+    // Assert
+    expect(isValid).toBeTruthy();
+  });
+
+  test('When the given strings length does not match, expect validation to fail', () => {
+    // Arrange
+    const value = 'Failed';
+
+    // Act
+    const isValid = stringValidations.isLength('test', value, { min: 10 });
+
+    // Assert
+    expect(isValid).not.toBeTruthy();
+  });
+
+  test('When a custom error message is provided, expect to be shown', () => {
+    // Arrange
+    const value = 'Test one two';
+    const customError = 'No funciono man';
+
+    // Act
+    const isValid = stringValidations
+      .isLength('test', value, { max: 5 }, customError)
+      .execute();
+
+    // Assert
+    expect(isValid).not.toBeTruthy();
+  });
+});
 
 // describe('String Validations isEmail', () => {});
 
