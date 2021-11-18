@@ -48,7 +48,45 @@ describe('String Validations isNotEmpty', () => {
   });
 });
 
-// describe('String Validations isMongoId', () => {});
+describe('String Validations isMongoId', () => {
+  test('When given value is a valid mongo id, expect validation to be passed', () => {
+    // Arrange
+    const value = '610ee6899a25e341708f1209';
+
+    // Act
+    const isValid = stringValidations.isMongoId('test', value).execute();
+
+    // Assert
+    expect(isValid).toBeTruthy();
+  });
+
+  test('When the given value is not a mong id, expect validation to fail', () => {
+    // Arrange
+    const value = 'Some1235idv7v6gdfhg98';
+
+    // Act
+    const isValid = stringValidations.isMongoId('test', value).execute();
+
+    // Assert
+    expect(isValid).not.toBeTruthy();
+  });
+
+  test('When a custom error message is provided, expect to be used when validation fails', () => {
+    // Arrange
+    const value = 'SomeRandomId1235idv7v6gdfh98';
+    const customError = 'Given field is not valid';
+
+    // Act
+    const { onFailureMessage } = stringValidations.isMongoId(
+      'test',
+      value,
+      customError
+    );
+
+    // Assert
+    expect(onFailureMessage).toBe(customError);
+  });
+});
 
 // describe('String Validations isLength', () => {});
 
