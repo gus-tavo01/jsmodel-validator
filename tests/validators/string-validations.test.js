@@ -110,7 +110,9 @@ describe('String Validations isLength', () => {
     const value = 'Failed';
 
     // Act
-    const isValid = stringValidations.isLength('test', value, { min: 10 });
+    const isValid = stringValidations
+      .isLength('test', value, { min: 10 })
+      .execute();
 
     // Assert
     expect(isValid).not.toBeTruthy();
@@ -122,15 +124,54 @@ describe('String Validations isLength', () => {
     const customError = 'No funciono man';
 
     // Act
-    const isValid = stringValidations
-      .isLength('test', value, { max: 5 }, customError)
-      .execute();
+    const { onFailureMessage } = stringValidations.isLength(
+      'test',
+      value,
+      { max: 5 },
+      customError
+    );
+    // Assert
+    expect(onFailureMessage).toBe(customError);
+  });
+});
+
+describe('String Validations isEmail', () => {
+  test('When given value is a valid email, expect validation to pass', () => {
+    // Arrange
+    const value = 'gustavoa.loera@gmail.com';
+
+    // Act
+    const isValid = stringValidations.isEmail('test', value).execute();
+
+    // Assert
+    expect(isValid).toBeTruthy();
+  });
+
+  test('When given value is not an email, expect validation to fail', () => {
+    // Arrange
+    const value = 'gustavo.loera.com';
+
+    // Act
+    const isValid = stringValidations.isEmail('test', value).execute();
 
     // Assert
     expect(isValid).not.toBeTruthy();
   });
-});
 
-// describe('String Validations isEmail', () => {});
+  test('When a a custom error is provided, expect to be shown', () => {
+    // Arrange
+    const value = 'gustavoa.loera';
+    const customError = 'This validation has failed';
+
+    // Act
+    const { onFailureMessage } = stringValidations.isEmail(
+      'test',
+      value,
+      customError
+    );
+    // Assert
+    expect(onFailureMessage).toBe(customError);
+  });
+});
 
 // describe('String Validations isDate', () => {});
