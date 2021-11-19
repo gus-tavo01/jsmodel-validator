@@ -174,4 +174,42 @@ describe('String Validations isEmail', () => {
   });
 });
 
-// describe('String Validations isDate', () => {});
+describe('String Validations isDate', () => {
+  test('When the given value is a valid date, expect validation to be passed', () => {
+    // Arrange
+    const value = '2019-11-01';
+
+    // Act
+    const isValid = stringValidations.isDate('test', value).execute();
+
+    // Assert
+    expect(isValid).toBeTruthy();
+  });
+
+  test('When given value is not a valid date, expect validation to fail', () => {
+    // Arrange
+    const value = '201911-01';
+
+    // Act
+    const isValid = stringValidations.isDate('test', value).execute();
+
+    // Assert
+    expect(isValid).not.toBeTruthy();
+  });
+
+  test('When a custom error is passed, expect to be shown', () => {
+    // Arrange
+    const value = '2019-11-0100a';
+    const customError = 'This is not working';
+
+    // Act
+    const { onFailureMessage } = stringValidations.isDate(
+      'test',
+      value,
+      customError
+    );
+
+    // Assert
+    expect(onFailureMessage).toBe(customError);
+  });
+});
