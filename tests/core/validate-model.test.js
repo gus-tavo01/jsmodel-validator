@@ -1,20 +1,22 @@
 const validateModel = require('../../core/validateModel');
-const Validations = require('../../core/validations');
+const ModelValidations = require('../../core/movelValidations');
 
 describe('Validate-Model execution', () => {
   test('When a validation model is provided, expect return an object with {isValid, fields}', async () => {
     // Arrange
     const person = { name: 'Do something', age: 13 };
-    const personModel = (e) => ({
-      name: [Validations.string.isNotEmpty('name', e.name)],
-      age: [Validations.number.isBetween('age', e.age, { from: 15, to: 30 })],
+    const min = 18;
+    const max = 35;
+    const personModel = () => ({
+      name: [ModelValidations.string.isNotEmpty()],
+      age: [ModelValidations.number.isBetween({ from: min, to: max })],
     });
 
     // Act
     const validationResult = await validateModel(personModel, person);
 
     expect(validationResult).toHaveProperty('fields', [
-      `Field 'age', expected to be by: 15 and 30. Got: ${person.age}`,
+      `Field 'age', expected to be by: ${min} and ${max}. Got: ${person.age}`,
     ]);
     expect(validationResult).toHaveProperty('isValid');
   });
@@ -22,11 +24,11 @@ describe('Validate-Model execution', () => {
   test('When an optional validation is provided and entity does not have it, expect to ommit the validations', async () => {
     // Arrange
     const dog = { name: 'pitu' };
-    const dogModel = (entity) => ({
-      name: [Validations.string.isNotEmpty('name', entity.name)],
+    const dogModel = () => ({
+      name: [ModelValidations.string.isNotEmpty()],
       age: [
-        Validations.common.isOptional('age', entity.age),
-        Validations.number.isBetween('age', entity.age, { from: 1, to: 10 }),
+        ModelValidations.common.isOptional(),
+        ModelValidations.number.isBetween({ from: 1, to: 10 }),
       ],
     });
 
@@ -42,11 +44,11 @@ describe('Validate-Model execution', () => {
     const from = 1;
     const to = 10;
     const dog = { name: 'pitu', age: 11 };
-    const dogModel = (entity) => ({
-      name: [Validations.string.isNotEmpty('name', entity.name)],
+    const dogModel = () => ({
+      name: [ModelValidations.string.isNotEmpty()],
       age: [
-        Validations.common.isOptional('age', entity.age),
-        Validations.number.isBetween('age', entity.age, { from, to }),
+        ModelValidations.common.isOptional(),
+        ModelValidations.number.isBetween({ from, to }),
       ],
     });
 
@@ -65,8 +67,8 @@ describe('Validate-Model execution', () => {
   test('When entity has extra properties, expect fields to be populated', async () => {
     // Arrange
     const cat = { name: 'yayis', size: 'gordito', age: 12 };
-    const catModel = (entity) => ({
-      name: [Validations.string.isNotEmpty('name', entity.name)],
+    const catModel = () => ({
+      name: [ModelValidations.string.isNotEmpty()],
     });
 
     // Act
@@ -86,9 +88,9 @@ describe('Validate-Model execution', () => {
       name: '',
       class: 'Mathematics',
     };
-    const studentModel = (e) => ({
-      name: [Validations.string.isNotEmpty('name', e.name, customError)],
-      class: [Validations.string.isNotEmpty('class', e.class)],
+    const studentModel = () => ({
+      name: [ModelValidations.string.isNotEmpty(customError)],
+      class: [ModelValidations.string.isNotEmpty()],
     });
 
     // Act
