@@ -19,18 +19,18 @@ const { validate, validateModel, validations } = require('js-validator-tool);
 
 ### Validation models
 
-Each _model_ must return an object, each property should have a collection of validations.
+_Models_ are functions that returns an object, each property has a collection of validations.
 
 ```
-const Validations = require('js-validator-tool/core/validations');
-const userModel = (entity) => ({
-  name: [Validations.string.isNotEmpty('name', entity.name)],
-  age: [Validations.number.isBetween('age', entity.age, { from: 18, to: 30 })],
-  isNew: [Validations.boolean.isBool('isNew', entity.isNew)]
+const ModelValidations = require('js-validator-tool/core/modelValidations');
+const userModel = () => ({
+  name: [ModelValidations.string.isNotEmpty()],
+  age: [ModelValidations.number.isBetween({ from: 18, to: 30 })],
+  isNew: [ModelValidations.boolean.isBool()]
 });
 ```
 
-### Validations
+### Single validations
 
 Every validation takes the following parameters
 
@@ -42,6 +42,42 @@ Every validation takes the following parameters
 | errorMessage  | Custom error message when validation is failed | Yes      |
 
 returns a Promise<{ fields: [String], isValid: Boolean }>
+
+### Available validations
+
+Validations are separated in types (string, boolean, number and common)
+
+#### String validations
+
+| Validation | Description                                                            | Params                     |
+| ---------- | ---------------------------------------------------------------------- | -------------------------- |
+| isNotEmpty | Returns true if the given string value is not empty                    |                            |
+| isString   | Returns true if the given value is a string                            |                            |
+| isMongoId  | Returns true if the given value is a valid mongo id                    |                            |
+| isDate     | Returns true if the given value is a date                              |                            |
+| isEmail    | Returns true if the given value is a valid email address               |                            |
+| isLength   | Returns true if the given string matches the provided min - max length | {min: number, max: number} |
+
+#### Common validations
+
+| Validation | Description                                            |
+| ---------- | ------------------------------------------------------ |
+| isOptional | Set the property as optional to be validated           |
+| isOneOf    | Returns true when any value matches the provided array |
+
+#### Number validations
+
+| Validation | Description                                                                   |
+| ---------- | ----------------------------------------------------------------------------- |
+| isNumeric  | Returns true when the given value is a valid number                           |
+| isNotZero  | Returns true when the provided value is different to 0                        |
+| isBetween  | Returns true when the provided value matches with the provided range (config) |
+
+#### Bool validations
+
+| Validation | Description                                                  |
+| ---------- | ------------------------------------------------------------ |
+| isBool     | Returns true if the given value is boolean ('true' is valid) |
 
 **Example**
 
@@ -73,17 +109,17 @@ console.log(customValResult); // prints { isValid: false, fields: [ "Field 'name
 ### Full example
 
 ```
-const { validate, validateModel, validations } = require('js-validator-tool');
+const { validate, validateModel, validations, modelValidations } = require('js-validator-tool');
 
 (async () => {
   // model validator example
-  const productModel = (entity) => ({
-    name: [validations.string.isNotEmpty('name', entity.name)],
+  const productModel = () => ({
+    name: [modelValidations.string.isNotEmpty('name', entity.name)],
     description: [
-      validations.common.isOptional('description', entity.description),
-      validations.string.isNotEmpty('description', entity.description),
+      modelValidations.common.isOptional('description', entity.description),
+      modelValidations.string.isNotEmpty('description', entity.description),
     ],
-    isNew: [validations.boolean.isBool('isNew', entity.isNew)],
+    isNew: [modelValidations.boolean.isBool('isNew', entity.isNew)],
   });
 
   const product = {
@@ -95,7 +131,7 @@ const { validate, validateModel, validations } = require('js-validator-tool');
   const modelValidationResult = await validateModel(productModel, product);
   console.log(modelValidationResult); // prints {isValid: true, fields: []}
 
-  // validations example
+  // single validations example
   const validationResult = await validate([
     validations.string.isString('foo', 'fooValue'),
     validations.number.isNotZero('bar', 0),
