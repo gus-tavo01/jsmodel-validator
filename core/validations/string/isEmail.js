@@ -6,6 +6,7 @@ module.exports = (key, value, errorMsg = undefined) => {
   return {
     validation: 'isEmail',
     property: key,
+    value,
     onFailureMessage: validationFailureMessage,
     execute: () => validator.isEmail(value, { ignore_whitespace: true }),
   };

@@ -6,6 +6,7 @@ module.exports = (key, value, errorMsg = undefined) => {
   return {
     validation: 'isMongoId',
     property: key,
+    value,
     onFailureMessage: validationFailureMessage,
     execute: () => validator.isMongoId(value),
   };

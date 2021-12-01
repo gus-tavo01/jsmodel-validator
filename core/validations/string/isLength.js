@@ -8,6 +8,7 @@ module.exports = (key, value, conf, errorMsg = undefined) => {
   return {
     validation: 'isLength',
     property: key,
+    value,
     onFailureMessage: validationFailureMessage,
     execute: () => validator.isLength(value, conf),
   };

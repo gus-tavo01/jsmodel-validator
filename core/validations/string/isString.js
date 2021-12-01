@@ -4,6 +4,7 @@ module.exports = (key, value, errorMsg = undefined) => {
   return {
     validation: 'isString',
     property: key,
+    value,
     onFailureMessage: validationFailureMessage,
     execute: () => typeof value === 'string',
   };
