@@ -39,6 +39,24 @@ describe('Validate execution', () => {
     });
   });
 
+  test('When isOptional validation is set and the field is invalid, expect validation errors', async () => {
+    // Arrange
+    const lastName = '';
+    const validations = [
+      Validations.common.isOptional('lastName'),
+      Validations.string.isNotEmpty('lastName', lastName),
+    ];
+
+    // Act
+    const validationResult = await validate(validations);
+
+    // Assert
+    expect(validationResult).toMatchObject({
+      isValid: false,
+      fields: [`Field 'lastName', expected not to be empty. Got: ${lastName}`],
+    });
+  });
+
   test('When isOptional validation is provided for a not present field, expect validation to be omitted', async () => {
     // Arrange
     const second = undefined;
