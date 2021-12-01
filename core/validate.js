@@ -5,8 +5,8 @@ module.exports = async (validations) => {
   const optionals = validations.filter((v) => v.validation === 'isOptional');
 
   const mandatoryValidations = validations.filter((v) => {
-    const optional = optionals.find((op) => op.property === v.property);
-    return !optional || optional.value !== undefined;
+    const optionalValidation = optionals.find((o) => o.property === v.property);
+    return !optionalValidation || v.value !== undefined;
   });
 
   const validationsToExecute = mandatoryValidations.map((v) =>
