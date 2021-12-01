@@ -10,6 +10,7 @@ module.exports = (
   return {
     validation: 'isOneOf',
     property: key,
+    value,
     onFailureMessage: validationFailureMessage,
     execute: () => {
       const handler = (v) => v === value;

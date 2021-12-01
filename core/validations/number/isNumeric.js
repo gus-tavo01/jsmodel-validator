@@ -4,6 +4,7 @@ module.exports = (key, value, errMessage = undefined) => {
   return {
     validation: 'isNumeric',
     property: key,
+    value,
     onFailureMessage: validationFailureMessage,
     execute: () => {
       if (Array.isArray(value) || value === undefined) return false;

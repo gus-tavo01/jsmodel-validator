@@ -4,6 +4,7 @@ module.exports = (key, value, errMessage = undefined) => {
   return {
     validation: 'isNotZero',
     property: key,
+    value,
     onFailureMessage: validationFailureMessage,
     execute: () => parseInt(value, 10) > 0,
   };

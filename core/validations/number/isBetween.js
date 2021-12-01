@@ -4,6 +4,7 @@ module.exports = (key, value, conf, errorMsg = undefined) => {
   return {
     validation: 'isBetween',
     property: key,
+    value,
     onFailureMessage: validationFailureMessage,
     execute: () => value >= conf.from && value <= conf.to,
   };

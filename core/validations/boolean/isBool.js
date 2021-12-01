@@ -4,6 +4,7 @@ module.exports = (key, value, errorMsg = undefined) => {
   return {
     property: key,
     validation: 'isBool',
+    value,
     onFailureMessage: validationFailureMessage,
     execute: () => {
       const v = value.toString();
