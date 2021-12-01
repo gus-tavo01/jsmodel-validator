@@ -5,7 +5,9 @@ module.exports = (
   compareFunc = undefined,
   errorMsg = undefined
 ) => {
-  const defaultMsg = `Field '${key}', expected to be a valid mongo id. Got: ${value}`;
+  const defaultMsg = `Field '${key}', expected to be in ${JSON.stringify(
+    collection
+  )}. Got: ${value}`;
   const validationFailureMessage = errorMsg || defaultMsg;
   return {
     validation: 'isOneOf',
