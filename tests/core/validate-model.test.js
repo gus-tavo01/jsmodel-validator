@@ -1,5 +1,5 @@
 const validateModel = require('../../core/validateModel');
-const ModelValidations = require('../../core/movelValidations');
+const ModelValidations = require('../../core/modelValidations');
 
 describe('Validate-Model execution', () => {
   test('When a validation model is provided, expect return an object with {isValid, fields}', async () => {
@@ -61,6 +61,27 @@ describe('Validate-Model execution', () => {
       fields: [
         `Field 'age', expected to be by: ${from} and ${to}. Got: ${dog.age}`,
       ],
+    });
+  });
+
+  test('When a field is set as optional and the validations are not passed, expect validation errors', async () => {
+    // Arrange
+    const dog = { name: 12345, age: 11 };
+    const dogModel = () => ({
+      name: [
+        ModelValidations.string.isString(),
+        ModelValidations.common.isOptional(),
+      ],
+      age: [ModelValidations.number.isNotZero()],
+    });
+
+    // Act
+    const validationResult = await validateModel(dogModel, dog);
+
+    // Assert
+    expect(validationResult).toMatchObject({
+      isValid: false,
+      fields: [`Field 'name', expected to be String. Got: ${dog.name}`],
     });
   });
 
